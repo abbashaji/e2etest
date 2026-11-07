@@ -1,0 +1,27 @@
+id: C-006
+title: Parallel cell C, add parts/c.txt and manifest.txt (fixed path gap)
+type: normal
+supersedes: [C-004]
+goal: |
+  Create parts/c.txt with exactly one line: c
+  Also create manifest.txt in the repo root with exactly one line: parts/c.txt
+inputs: []
+after:
+  - C-001
+provides:
+  - parts/c.txt
+  - manifest.txt
+read:
+  - hello.txt
+allowed_paths:
+  - parts/c.txt
+  - manifest.txt
+outputs:
+  - parts/c.txt
+  - manifest.txt
+acceptance:
+  - cmd: test -f parts/c.txt
+  - cmd: grep -qx c parts/c.txt
+  - cmd: grep -qx parts/c.txt manifest.txt
+notes: |
+  Supersedes C-004, whose allowed_paths and outputs lacked manifest.txt.
